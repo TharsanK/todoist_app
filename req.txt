@@ -1,0 +1,16 @@
+## TODOIST APP ##
+
+# File System #
+1. main.py
+2. funcs.py
+
+# Functionality #
+1. add
+2. delete
+3. mark
+4. unmark
+5. get
+
+# Technology Stack #
+1. Python
+2. CSV Module
