@@ -38,6 +38,23 @@ while True:
         lst = [t_lst,t_name,t_status,date,overdue]
         funcs.add(lst)
         print("Successfully Added")
+    elif cmd.lower() == "delete":
+        task_name = input("Enter task name: ")
+        task_list = input("Enter the name of the list: ")
+        funcs.delete(task_list,task_name)
+
+    elif cmd.lower() == "mark":
+        task_name = input("Enter task name: ")
+        task_list = input("Enter the name of the list: ")
+        funcs.mark(task_name,task_list)
+    elif cmd.lower() == "unmark":
+        task_name = input("Enter task name: ")
+        task_list = input("Enter the name of the list: ")
+        funcs.unmark(task_name,task_list)
+    elif cmd.lower() == "get":
+        task_list = input("Enter task list name: ")
+        funcs.get(task_list)
+    
 
 
     elif cmd.lower() == "exit":

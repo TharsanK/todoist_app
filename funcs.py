@@ -1,6 +1,11 @@
 # IMPORTS
 import mysql.connector
 from datetime import datetime
+from rich.console import Console
+from rich.table import Table
+
+
+console = Console()
 
 # Establishing Connection
 con = mysql.connector.Connect(
@@ -18,5 +23,51 @@ def add(task):
     INSERT INTO {task[0]} VALUES('{task[1]}',{task[2]},'{task[3]}',{task[4]});"""
     cur.execute(command)
     con.commit()
+
+def delete(task_list,task_name):
+    command = f"""
+        DELETE FROM {task_list} WHERE TASKNAME='{task_name};'
+        """
+    cur.execute(command)
+    con.commit()
+def mark(task_name,task_list):
+    command = f"""
+        UPDATE {task_list}
+        SET STATUS=1 WHERE TASKNAME='{task_name}';
+        """
+    cur.execute(command)
+    con.commit()
+def unmark(task_name,task_list):
+    command = f"""
+        UPDATE {task_list}
+        SET STATUS=0 WHERE TASKNAME='{task_name}';
+        """
+    cur.execute(command)
+    con.commit()
+
+def get(task_list):
+    command = f"""
+        SELECT * FROM {task_list}
+    """
+    cur.execute(command)
+    task_dict = []
+    for i in cur:
+        task_dict.append(list(i))
+    table = Table(title=f"TASKS IN {task_list}")
+    table.add_column("TASKNAME", justify="center", style="green")
+    table.add_column("STATUS", justify="center", style="green")
+    table.add_column("DUEDATE", justify="center", style="green")
+    for i in task_dict:
+        if i[1] == 1:
+            i[1] = "✅"
+        elif i[1] == 0 and i[3] == 0:
+            i[1] = "⬜"
+        elif i[1] == 0 and i[3] == 1:
+            i[1] = "❌"
+        print(i[2].strftime("%Y-%m-%d %H:%M"))
+        table.add_row(str(i[0]),str(i[1]),str(i[2].strftime("%Y-%m-%d %H:%M")),str(i[3]))
+    print(task_dict)
+    console.print(table)
+
 
 
