@@ -6,7 +6,7 @@ from datetime import datetime
 con = mysql.connector.Connect(
         host = "localhost",
         user = "root",
-        password = "saitharsan5",
+        password = "saitharsan$5",
         database = "task"
         )
 # Cursor Obejct
