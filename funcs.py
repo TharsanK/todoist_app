@@ -65,8 +65,7 @@ def get(task_list):
         elif i[1] == 0 and i[3] == 1:
             i[1] = "❌"
         print(i[2].strftime("%Y-%m-%d %H:%M"))
-        table.add_row(str(i[0]),str(i[1]),str(i[2].strftime("%Y-%m-%d %H:%M")),str(i[3]))
-    print(task_dict)
+        table.add_row(str(i[0]),str(i[1]),str(i[2].strftime("%Y-%m-%d %H:%M")))
     console.print(table)
 
 
