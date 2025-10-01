@@ -10,6 +10,7 @@ delete: deletes a task
 mark: marks a task as done
 unmark: unmarks a as undone
 get: get all the tasks
+delete tasklist: delete a tasklist
 exit: to exit the app
 """
 # Welcome to app message
@@ -42,7 +43,9 @@ while True:
         task_name = input("Enter task name: ")
         task_list = input("Enter the name of the list: ")
         funcs.delete(task_list,task_name)
-
+    elif cmd.lower() == "delete tasklist":
+        task_list = input("Enter task list name: ")
+        funcs.delete_task_list(task_list)
     elif cmd.lower() == "mark":
         task_name = input("Enter task name: ")
         task_list = input("Enter the name of the list: ")
