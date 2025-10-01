@@ -18,8 +18,9 @@ print()
 print("WELCOME TO TERMINAL TODOIST: An App for Student Productivity")
 # Print Help Message at the start of app
 print(HELP)
-# Handling User Input
+funcs.update_database()
 
+# Handling User Input
 while True:
     cmd = input(">>>")
     if cmd.lower() == "add":

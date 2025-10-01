@@ -134,6 +134,23 @@ def check_list(lst):
         return 0
     else:
         return 1
+def update_database():
+    cmd1 = f"""
+    SHOW TABLES;
+    """
+    cur.execute(cmd1)
+    table_lst = []
+    for i in cur:
+        table_lst.append(i[0])
+    for i in table_lst:
+        cmd2 = f"""
+        UPDATE {i}
+        SET OVERDUE = 1 
+        WHERE DUEDATE < SYSDATE();
+        """
+        cur.execute(cmd2)
+        con.commit()
+
     
 
 
