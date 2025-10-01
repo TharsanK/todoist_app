@@ -52,7 +52,7 @@ while True:
         task_list = input("Enter the name of the list: ")
         funcs.unmark(task_name,task_list)
     elif cmd.lower() == "get":
-        task_list = input("Enter task list name: ")
+        task_list = input("Enter task list name or Click Enter to get all task list1: ")
         funcs.get(task_list)
     
 
