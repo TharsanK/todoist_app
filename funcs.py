@@ -64,30 +64,36 @@ def unmark(task_name,task_list):
         con.commit()
 
 def get(task_list):
-    command = f"""
-        SELECT * FROM {task_list}
-    """
     command2 = f"""
         SHOW TABLES;
     """
-    cur.execute(command)
-    task_dict = []
+    cur.execute(command2)
+    table_lst = []
     for i in cur:
-        task_dict.append(list(i))
-    table = Table(title=f"TASKS IN {task_list}")
-    table.add_column("TASKNAME", justify="center", style="green")
-    table.add_column("STATUS", justify="center", style="green")
-    table.add_column("DUEDATE", justify="center", style="green")
-    for i in task_dict:
-        if i[1] == 1:
-            i[1] = "✅"
-        elif i[1] == 0 and i[3] == 0:
-            i[1] = "⬜"
-        elif i[1] == 0 and i[3] == 1:
-            i[1] = "❌"
-        print(i[2].strftime("%Y-%m-%d %H:%M"))
-        table.add_row(str(i[0]),str(i[1]),str(i[2].strftime("%Y-%m-%d %H:%M")))
-    console.print(table)
+        table_lst.append(i[0])
+    print(table_lst)
+    for i in table_lst:
+        command = f"""
+            SELECT * FROM {i}
+        """
+        cur.execute(command)
+        task_dict = []
+        for i in cur:
+            task_dict.append(list(i))
+        table = Table(title=f"TASKS IN {task_list}")
+        table.add_column("TASKNAME", justify="center", style="green")
+        table.add_column("STATUS", justify="center", style="green")
+        table.add_column("DUEDATE", justify="center", style="green")
+        for i in task_dict:
+            if i[1] == 1:
+                i[1] = "✅"
+            elif i[1] == 0 and i[3] == 0:
+                i[1] = "⬜"
+            elif i[1] == 0 and i[3] == 1:
+                i[1] = "❌"
+            print(i[2].strftime("%Y-%m-%d %H:%M"))
+            table.add_row(str(i[0]),str(i[1]),str(i[2].strftime("%Y-%m-%d %H:%M")))
+        console.print(table)
 
 def create_list(lst):
     command = "SHOW TABLES;"
