@@ -13,4 +13,4 @@
 
 # Technology Stack #
 1. Python
-2. CSV Module
+2. MYSQL.CONNECTOR PYTHON
