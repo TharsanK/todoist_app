@@ -4,17 +4,18 @@ from datetime import datetime
 from rich.console import Console
 from rich.table import Table
 
-
+# CREATING RICH CONSOLE
 console = Console()
 
-# Establishing Connection
+# ESTABLISHING CONNECTION TO MYSQL
 con = mysql.connector.Connect(
         host = "localhost",
         user = "root",
         password = "saitharsan$5",
         database = "task"
         )
-# Cursor Obejct
+
+# CURSOR OBJECT
 cur = con.cursor()
 
 # FUNCTION 1: ADD
@@ -30,6 +31,7 @@ def add(task):
     cur.execute(command)
     con.commit()
 
+# FUNCTION 2: DELETE
 def delete(task_list,task_name):
     command = f"""
         DELETE FROM {task_list} WHERE TASKNAME='{task_name}';
@@ -40,6 +42,8 @@ def delete(task_list,task_name):
     else:
         cur.execute(command)
         con.commit()
+
+# FUNCTION 3: MARK
 def mark(task_name,task_list):
     command = f"""
         UPDATE {task_list}
@@ -51,6 +55,8 @@ def mark(task_name,task_list):
     else:
         cur.execute(command)
         con.commit()
+
+# FUNCTION 4: UNMARK
 def unmark(task_name,task_list):
     command = f"""
         UPDATE {task_list}
@@ -63,7 +69,8 @@ def unmark(task_name,task_list):
         cur.execute(command)
         con.commit()
 
-def get(task_list):
+# FUNCTION 5: GET
+def get():
     command2 = f"""
         SHOW TABLES;
     """
@@ -93,6 +100,8 @@ def get(task_list):
                 k[1] = "❌"
             table.add_row(str(k[0]),str(k[1]),str(k[2].strftime("%Y-%m-%d %H:%M")))
         console.print(table)
+
+# FUNCTION 6: DELETE TASK LIST
 def delete_task_list(task_list):
     command = f"""
     DROP TABLE {task_list};
@@ -104,7 +113,7 @@ def delete_task_list(task_list):
         cur.execute(command)
         con.commit
 
-
+# FUNCTION 7: CREATE LIST FUNCTION --> LINKED AND USED IN FUNCTION 1: ADD 
 def create_list(lst):
     command = "SHOW TABLES;"
     cur.execute(command)
@@ -123,7 +132,7 @@ def create_list(lst):
         cur.execute(create)
         con.commit()
         return 1
-
+# FUNCTION 8: CHECK LIST --> LINKED AND USED IN MARK,UNMARK,DELETE,DELETE TASKLIST,GET
 def check_list(lst):
     command = "SHOW TABLES;"
     cur.execute(command)

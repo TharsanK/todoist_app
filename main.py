@@ -78,8 +78,7 @@ while True:
     
     # THE GET ALL FUNCTIONALITY
     elif cmd.lower() == "get":
-        task_list = input("Enter task list name or Click Enter to get all task list1: ")
-        funcs.get(task_list)
+        funcs.get()
     
     # THE EXIT FUNCTIONALITY
     elif cmd.lower() == "exit":
