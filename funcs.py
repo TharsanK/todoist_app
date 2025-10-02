@@ -120,7 +120,7 @@ def create_list(lst):
     table_lst = []
     for i in cur:
         table_lst.append(i[0])
-    if lst in table_lst:
+    if lst.lower() in table_lst:
         return 0
     else:
         create = f"""CREATE TABLE {lst}(
@@ -139,10 +139,11 @@ def check_list(lst):
     table_lst = []
     for i in cur:
         table_lst.append(i[0])
-    if lst in table_lst:
+    if lst.lower() in table_lst:
         return 0
     else:
         return 1
+
 def update_database():
     cmd1 = f"""
     SHOW TABLES;
